@@ -1,0 +1,12 @@
+--pre
+--find-links https://storage.googleapis.com/jax-releases/jax_releases.html
+jax[cuda]
+flax
+optax
+equinox
+imageio
+einops
+numpy
+torch
+torchvision
+argparse
