@@ -71,7 +71,7 @@ score = model.apply({'params': params}, x, t)
 <img src="./images/cifar10/ex_37.gif" alt="drawing"  height="80">
 <img src="./images/cifar10/ex_38.gif" alt="drawing"  height="80">
 <img src="./images/cifar10/ex_39.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_40.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_22.gif" alt="drawing"  height="80">
 </p>
 
 ```python
