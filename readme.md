@@ -2,21 +2,19 @@
 
 This repository serves as a simple code-base to perform experimentation with original diffusion approaches ([DDIM](https://arxiv.org/abs/2010.02502) and [DDPM](https://proceedings.neurips.cc/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf)), and not stable diffusion---which can easily be added. Specifically, the code is simple to read and flexible enough to be modified for one own usage. This implementation includes both ddim and ddpm sampling written using jax primitives for jit-compilation unlike the commonly found [jax-based diffusion repository](https://github.com/yiyixuxu/denoising-diffusion-flax).
 
-<p align="center">
-<img src="./images/mnist/ex_0.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_1.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_2.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_3.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_4.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_5.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_6.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_7.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_8.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_9.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_10.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_11.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_12.gif" alt="drawing" height="100">
-<img src="./images/mnist/ex_13.gif" alt="drawing" height="100">
+<p align="left">
+<img src="./images/mnist/ex_0.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_1.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_2.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_3.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_4.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_5.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_6.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_7.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_8.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_9.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_10.gif" alt="drawing" height="64">
+<img src="./images/mnist/ex_11.gif" alt="drawing" height="64">
 </p>
 
 
@@ -31,7 +29,42 @@ If you encounter trouble with installying [PyTorch](https://pytorch.org) or [Jax
 <img src="./images/train_300.jpg" alt="drawing" height="400"/>
 </p>
 
-# Usage
+# Training
+```
+python train_unet.py \
+    --loss_type pred_v \ 
+    --min_snr_gamma 5.0 \
+    --timesteps 1000 \ 
+    --sampling_steps 250 \ 
+    --seed 3867 \ 
+    --save_every_k 5 \ 
+    --max_to_keep 5 \ 
+    --epochs 1000 \ 
+    --batch_size 128 \
+    --num_workers 0 \ 
+    --gradient_accummulation_steps 1 \ 
+    --pin_memory True \ 
+    --learning_rate 0.0001 \ 
+    --weight_decay 0.0001 \ 
+    --max_ema_decay 0.9999 \ 
+    --min_ema_decay 0.0 \ 
+    --ema_decay_power 0.66667 \ 
+    --ema_inv_gamma 1 \ 
+    --start_ema_update_after 100 \ 
+    --update_ema_every 10 \ 
+    --result_path ./unet_cifar10 \ 
+    --dataset cifar10 \ 
+    --root_folder ../data \ 
+    --beta_schedule sigmoid \ 
+    --dim 64 \ 
+    --dim_mults 1,2,4,8 \ 
+    --resnet_block_groups 8 \ 
+    --learned_variance False \
+    --clear_gpu_cache False 
+```
+Note, checkpointing is used and thus, you can continue training from a checkpoint if stopped abruptly.
+
+## Model Creation
 For more information, take a look at **train.py** in **src/utils** and the jupyter notebook provided in **nbs**. 
 ```python
 import jax
@@ -53,25 +86,19 @@ score = model.apply({'params': params}, x, t)
 ```
 
 ## Sampling
-<p align="center">
-<img src="./images/cifar10/ex_0.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_5.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_6.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_12.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_18.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_19.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_25.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_26.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_28.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_32.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_33.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_34.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_35.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_36.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_37.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_38.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_39.gif" alt="drawing"  height="80">
-<img src="./images/cifar10/ex_22.gif" alt="drawing"  height="80">
+<p align="left">
+<img src="./images/cifar10/ex_0.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_5.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_6.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_12.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_18.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_19.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_28.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_34.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_35.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_36.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_37.gif" alt="drawing"  height="64">
+<img src="./images/cifar10/ex_38.gif" alt="drawing"  height="64">
 </p>
 
 ```python
@@ -156,42 +183,6 @@ x_ddim = ddim_sample_fn(
 # batch_size x image_shape
 x_ddim = unshard(x_ddim)
 ```
-
-## Training
-```
-python train_unet.py \
-    --loss_type pred_v \ 
-    --min_snr_gamma 5.0 \
-    --timesteps 1000 \ 
-    --sampling_steps 250 \ 
-    --seed 3867 \ 
-    --save_every_k 5 \ 
-    --max_to_keep 5 \ 
-    --epochs 1000 \ 
-    --batch_size 128 \
-    --num_workers 0 \ 
-    --gradient_accummulation_steps 1 \ 
-    --pin_memory True \ 
-    --learning_rate 0.0001 \ 
-    --weight_decay 0.0001 \ 
-    --max_ema_decay 0.9999 \ 
-    --min_ema_decay 0.0 \ 
-    --ema_decay_power 0.66667 \ 
-    --ema_inv_gamma 1 \ 
-    --start_ema_update_after 100 \ 
-    --update_ema_every 10 \ 
-    --result_path ./unet_cifar10 \ 
-    --dataset cifar10 \ 
-    --root_folder ../data \ 
-    --beta_schedule sigmoid \ 
-    --dim 64 \ 
-    --dim_mults 1,2,4,8 \ 
-    --resnet_block_groups 8 \ 
-    --learned_variance False \
-    --clear_gpu_cache False 
-```
-Note, checkpointing is used and thus, you can continue training from a checkpoint if stopped abruptly.
-
 ##  Reloading Model
 Checkpointing of the model and management of model's checkpoints are done through [orbax](https://github.com/google/orbax).
 ```python
