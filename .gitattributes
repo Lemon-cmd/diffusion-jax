@@ -1,3 +1,7 @@
 checkpoint filter=lfs diff=lfs merge=lfs -text
 mnist_unet_pred_v/ckpts/126/default/checkpoint filter=lfs diff=lfs merge=lfs -text
 cifar10_unet_pred_v/ckpts/1000/default/checkpoint filter=lfs diff=lfs merge=lfs -text
+cifar10_unet_pred_v filter=lfs diff=lfs merge=lfs -text
+*.gif filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
