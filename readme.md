@@ -256,11 +256,10 @@ x_ddim, x_over_time = ddim_sample_fn(
 frames = 100
 create_gifs(
     x_over_time, 
-    fps = frames, 
+    duration = 1 / frames, 
     folder = "./example_gifs/", 
     image_size=(256, 256, 3), 
     num_images=5,
-    duration=None,                    #optional
 )
 ```
 
