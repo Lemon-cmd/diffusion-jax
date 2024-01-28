@@ -265,4 +265,4 @@ create_gifs(
 
 ## Exponential Model Averaging
 EMA update adapted from [yiyixuxu](https://github.com/yiyixuxu/denoising-diffusion-flax) is performed using the following equation $$p_{t + 1} = (1.0 - d) p_{old} + (d) p_{new}$$ 
-where $d = 1.0 - (1.0 + (\frac{t}{\gamma})^{-p})$
+where $d = (\frac{t}{\gamma})^{-p})$
