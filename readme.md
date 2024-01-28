@@ -85,19 +85,11 @@ score = model.apply({'params': params}, x, t)
 ```
 
 ## Sampling
-<p align="left">
-<img src="./images/mnist/ex_0.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_1.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_2.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_3.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_4.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_5.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_6.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_7.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_8.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_9.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_10.gif" alt="drawing" height="64">
-<img src="./images/mnist/ex_11.gif" alt="drawing" height="64">
+<p align="center">
+<img src="./images/mnist/ex_0.gif" alt="drawing">
+<img src="./images/mnist/ex_1.gif" alt="drawing">
+<img src="./images/mnist/ex_10.gif" alt="drawing">
+<img src="./images/mnist/ex_11.gif" alt="drawing">
 </p>
 
 
