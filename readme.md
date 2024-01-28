@@ -2,20 +2,34 @@
 
 This repository serves as a simple code-base to perform experimentation with original diffusion approaches ([DDIM](https://arxiv.org/abs/2010.02502) and [DDPM](https://proceedings.neurips.cc/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf)), and not stable diffusion---which can easily be added. Specifically, the code is simple to read and flexible enough to be modified for one own usage. This implementation includes both ddim and ddpm sampling written using jax primitives for jit-compilation unlike the commonly found [jax-based diffusion repository](https://github.com/yiyixuxu/denoising-diffusion-flax).
 
-
 <p align="center">
-<img src="./images/mnist_50_epoch.jpg" alt="drawing" height="600" width="650"/>
+<img src="./images/mnist/ex_0.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_1.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_2.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_3.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_4.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_5.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_6.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_7.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_8.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_9.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_10.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_11.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_12.gif" alt="drawing" height="100">
+<img src="./images/mnist/ex_13.gif" alt="drawing" height="100">
 </p>
 
-<p align="center">
-<img src="./images/train_300.jpg" alt="drawing" height="600" width="650"/>
-</p>
 
 # Installation
 ```python
 pip install -r requirements.txt
 ```
 If you encounter trouble with installying [PyTorch](https://pytorch.org) or [Jax](https://github.com/google/jax), please refer to their documentation, respectively.
+
+<p align="left">
+<img src="./images/mnist_50_epoch.jpg" alt="drawing" height="400"/>
+<img src="./images/train_300.jpg" alt="drawing" height="400"/>
+</p>
 
 # Usage
 For more information, take a look at **train.py** in **src/utils** and the jupyter notebook provided in **nbs**. 
@@ -39,6 +53,27 @@ score = model.apply({'params': params}, x, t)
 ```
 
 ## Sampling
+<p align="center">
+<img src="./images/cifar10/ex_0.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_5.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_6.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_12.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_18.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_19.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_25.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_26.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_28.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_32.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_33.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_34.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_35.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_36.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_37.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_38.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_39.gif" alt="drawing"  height="80">
+<img src="./images/cifar10/ex_40.gif" alt="drawing"  height="80">
+</p>
+
 ```python
 import equinox as eqx
 from src import linear_schedule, ddim_sample, ddpm_sample, get_var_params, get_pred_fn, get_time_pairs
@@ -230,10 +265,11 @@ x_ddim, x_over_time = ddim_sample_fn(
 frames = 100
 create_gifs(
     x_over_time, 
-    duration = frames / 5, 
+    fps = frames, 
     folder = "./example_gifs/", 
     image_size=(256, 256, 3), 
-    num_images=5
+    num_images=5,
+    duration=None,                    #optional
 )
 ```
 
