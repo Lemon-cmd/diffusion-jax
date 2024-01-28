@@ -155,6 +155,7 @@ python train_unet.py \
     --learned_variance False \
     --clear_gpu_cache False 
 ```
+Note, checkpointing is used and thus, you can continue training from a checkpoint if stopped abruptly.
 
 ##  Reloading Model
 Checkpointing of the model and management of model's checkpoints are done through [orbax](https://github.com/google/orbax).

@@ -112,13 +112,6 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "--pin_memory",
-    default=True,
-    type=str2bool,
-    help="Pin memory.",
-)
-
-parser.add_argument(
     "--learning_rate",
     default=1e-4,
     type=float,
@@ -318,7 +311,6 @@ train_loader = DataLoader(
     shuffle=True,
     batch_size=config["batch_size"],
     num_workers=config["num_workers"],
-    pin_memory=config["pin_memory"],
 )
 
 train_loader = DiffusionLoader(
@@ -342,9 +334,10 @@ key = jax.random.PRNGKey(config["seed"])
 
 config["key"] = key
 config["iteration"] = 0
+config["var_params"] = var_params
 config["result_path"] = config["result_path"] + "_" + config["loss_type"]
 
-params = model.init(key, x, t)["params"]
+params = model.init(key, x[:1], t[:1])["params"]
 
 ema_params = copy.deepcopy(params)
 print("Number of params: ", f"{get_nparams(params):,}")

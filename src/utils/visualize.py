@@ -3,7 +3,7 @@ import jax
 import imageio
 import numpy as np
 import jax.numpy as jnp
-from typing import Dict, Callable
+from typing import Dict, Callable, Union
 
 
 def make_folder(name: str):
@@ -106,20 +106,28 @@ def ddpm_sample_visual(
 
 def create_gifs(
     x_over_time: np.asarray,  # Steps x Batch x H x W x C
-    duration: float = 100,
-    folder: str = "./example_gifs/",
+    fps: int = 100,
+    folder: str = "./example_gifs",
     *,
     image_size: tuple = (256, 256),
-    num_images: int = 10
+    num_images: int = 10,
+    duration: Union[float, list] = None
 ):
     make_folder(folder)
 
     steps = x_over_time.shape[0]
     num_images = min(x_over_time.shape[1], num_images)
+    
+    if duration is None:
+        duration = 1.0 / fps
+    
+    path = folder 
+    if path[-1] != '/':
+        path += '/'
 
     for img_id in range(num_images):
         with imageio.get_writer(
-            folder + "ex_{0}.gif".format(img_id), mode="I", duration=duration
+            path + "ex_{0}.gif".format(img_id), format="GIF", mode="I", fps=fps, duration=duration
         ) as writer:
             for step in range(steps):
                 image = x_over_time[step][img_id].squeeze()

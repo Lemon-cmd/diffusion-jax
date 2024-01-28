@@ -135,9 +135,11 @@ def train_model(
         key = jax.random.PRNGKey(config["timesteps"])
         key, _ = jax.random.split(key)
 
+    save_every_k = config["save_every_k"]
     train_status = tqdm.tqdm(range(1, config["epochs"] + 1))
 
     pred_fn = get_pred_fn(train_loader.loss_type)
+    
     sampling = eqx.filter_pmap(
         ddim_sample, in_axes=(0, None, None, 0, None, None, None, None, None)
     )
@@ -214,7 +216,7 @@ def train_model(
             "Epoch: {0}    Loss: {1:.6f}".format(epoch, running_loss)
         )
 
-        if epoch % config["save_every_k"] == 0:
+        if epoch % save_every_k == 0:
             """Visualize Sampling Quality
             Note--- we evaluate with ema_params
             """
