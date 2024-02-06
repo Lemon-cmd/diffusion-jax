@@ -21,7 +21,7 @@ This repository serves as a simple code-base to perform experimentation with ori
 ```python
 pip install -r requirements.txt
 ```
-If you encounter trouble with installying [PyTorch](https://pytorch.org) or [Jax](https://github.com/google/jax), please refer to their documentation, respectively.
+If you encounter trouble with installing [Jax](https://github.com/google/jax), please refer to its documentation.
 
 <p align="left">
 <img src="./images/mnist_50_epoch.jpg" alt="drawing" height="400"/>
